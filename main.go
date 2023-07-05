@@ -25,6 +25,14 @@ func main() {
 		&el1,
 	}
 	printList(&el0)
+	deleteLastEl(&el0)
+	printList(&el0)
+	deleteLastEl(&el0)
+	printList(&el0)
+	deleteLastEl(&el0)
+	printList(&el0)
+	addLastEl(22, &el0)
+	printList(&el0)
 }
 
 func printList(root *Element) {
@@ -36,7 +44,28 @@ func printList(root *Element) {
 	if root.next != nil {
 		printList(root.next)
 	} else {
-		fmt.Println("next nil")
+		fmt.Println("end")
 		return
+	}
+}
+
+func deleteLastEl(root *Element) {
+	if root == nil {
+		fmt.Println("root nil")
+		return
+	}
+	if root.next.next == nil {
+		root.next = nil
+	} else {
+		deleteLastEl(root.next)
+	}
+}
+
+func addLastEl(newVal int, root *Element) {
+	if root == nil {
+		fmt.Println("root nil")
+	}
+	if root.next == nil {
+		root.next = &Element{newVal, nil}
 	}
 }
