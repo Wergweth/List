@@ -6,44 +6,40 @@ type Element struct {
 	value int
 	next  *Element
 }
+type LinkedList struct {
+	head *Element
+}
 
 func main() {
-	el3 := Element{
-		4,
-		nil,
-	}
-	el2 := Element{
-		3,
-		&el3,
-	}
-	el1 := Element{
-		2,
-		&el2,
-	}
-	el0 := Element{
-		1,
-		&el1,
-	}
-	printList(&el0)
-	reverse(&el0)
-	printList(&el3)
+	ll := LinkedList{}
+	ll.add(111)
+	ll.add(222)
+	ll.display()
 }
 
-func printList(root *Element) {
-	if root == nil {
-		fmt.Println("root nil")
-		return
-	}
-	fmt.Println(root.value)
-	if root.next != nil {
-		printList(root.next)
+func (l *LinkedList) add(value int) {
+	NewElement := &Element{value, nil}
+	if l.head == nil {
+		l.head = NewElement
 	} else {
-		fmt.Println("end")
-		return
+		current := l.head
+		for current.next != nil {
+			current = current.next
+		}
+		current.next = NewElement
 	}
 }
 
-func deleteLastEl(root *Element) {
+func (l *LinkedList) display() {
+	current := l.head
+	for current != nil {
+		fmt.Println(current.value)
+		current = current.next
+	}
+	fmt.Println("--end--")
+}
+
+/*func deleteLastEl(root *Element) {
 	if root == nil {
 		fmt.Println("root nil")
 		return
@@ -52,19 +48,6 @@ func deleteLastEl(root *Element) {
 		root.next = nil
 	} else {
 		deleteLastEl(root.next)
-	}
-}
-
-func addLastEl(newVal int, root *Element) {
-	if root == nil {
-		fmt.Println("root nil")
-		return
-	}
-	if root.next == nil {
-		root.next = &Element{newVal, nil}
-		return
-	} else {
-		addLastEl(newVal, root.next)
 	}
 }
 
@@ -82,4 +65,4 @@ func reverse(root *Element) {
 		root = current
 	}
 	return
-}
+}*/
