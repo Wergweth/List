@@ -14,6 +14,9 @@ func main() {
 	ll := LinkedList{}
 	ll.add(111)
 	ll.add(222)
+	ll.add(333)
+	ll.display()
+	ll.delete(222)
 	ll.display()
 }
 
@@ -39,18 +42,28 @@ func (l *LinkedList) display() {
 	fmt.Println("--end--")
 }
 
-/*func deleteLastEl(root *Element) {
-	if root == nil {
-		fmt.Println("root nil")
+func (l *LinkedList) delete(value int) {
+	if l.head == nil {
+		fmt.Println("nothing to delete")
 		return
 	}
-	if root.next.next == nil {
-		root.next = nil
-	} else {
-		deleteLastEl(root.next)
+	if l.head.value == value {
+		l.head = l.head.next
+		fmt.Println("deleted")
+		return
+	}
+	current := l.head
+	for current.next != nil {
+		if current.next.value == value {
+			current.next = current.next.next
+			fmt.Println("deleted")
+			return
+		}
+		current = current.next
 	}
 }
 
+/*
 func reverse(root *Element) {
 	if root == nil {
 		fmt.Println("root nil")
