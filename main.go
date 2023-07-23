@@ -16,8 +16,9 @@ func main() {
 	ll.add(222)
 	ll.add(333)
 	ll.display()
-	ll.delete(222)
+	ll.reverse()
 	ll.display()
+
 }
 
 func (l *LinkedList) add(value int) {
@@ -63,19 +64,14 @@ func (l *LinkedList) delete(value int) {
 	}
 }
 
-/*
-func reverse(root *Element) {
-	if root == nil {
-		fmt.Println("root nil")
-		return
+func (l *LinkedList) reverse() {
+	var prev *Element = nil
+	current := l.head
+	for current != nil {
+		next := current.next
+		current.next = prev
+		prev = current
+		current = next
 	}
-	var current *Element
-	var next *Element
-	for root != nil {
-		current = root.next
-		root.next = next
-		next = root
-		root = current
-	}
-	return
-}*/
+	l.head = prev
+}
